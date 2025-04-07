@@ -80,7 +80,7 @@ const Dashboard = () => {
             onChange={(e) => setContent(e.target.value)}
             placeholder="Enter your text here..."
             className="min-h-[400px] w-full resize-none border-0 bg-background font-mono text-sm shadow-none focus-visible:ring-0"
-          />
+          />d
         </div>
       </div>
       <div className="flex justify-between">
