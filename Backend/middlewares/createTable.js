@@ -34,7 +34,23 @@ async function createTables(client) {
             EXECUTE FUNCTION update_updated_at_column();
         END IF;
       END
-      $$;`;
+      $$;
+      -- Delete old rows function
+      CREATE OR REPLACE FUNCTION instance_delete_old_rows() RETURNS trigger
+      LANGUAGE plpgsql
+      AS $$
+      BEGIN
+        DELETE FROM Instance WHERE timestamp < NOW() - INTERVAL '100 days';
+        RETURN NEW;
+      END;
+      $$;
+
+      -- Trigger
+      CREATE TRIGGER instance_delete_old_rows_trigger
+      AFTER INSERT ON Instance
+      FOR EACH ROW
+      EXECUTE FUNCTION instance_delete_old_rows();
+      `;
 
     await client.query(createTableQuery);
     console.log("Tables setup completed successfully");
@@ -56,7 +72,7 @@ export const createTableMiddleware = (client) => {
         await createTables(client);
         tablesInitialized = true;
       }
-      console.log('Table Middleware resolved');
+      console.log("Table Middleware resolved");
       next();
     } catch (err) {
       console.error("Error in createTableMiddleware:", err);
