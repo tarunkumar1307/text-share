@@ -18,36 +18,41 @@ const Navbar = () => {
       setCopied(false);
     }, 2000);
   };
-  
-  return (
-    <header className="border-b border-border bg-background px-6 py-4">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Code2 className="h-6 w-6" />
-          <h1 className="text-xl font-bold tracking-tight">CodeShare</h1>
-        </div>
-        <div className="flex items-center gap-4">
-          <ModeToggle />
-          {shareID && (
-            <div className="flex items-center gap-2">
-              <span className="text-sm font-medium text-muted-foreground">
-                ID: {shareID}
-              </span>
 
-              <Button
-                onClick={copyLink}
-                variant="ghost"
-                size="icon"
-                className="h-8 w-8"
-              >
-                {copied ? (
-                  <Check className="h-4 w-4" color="green" />
-                ) : (
-                  <Copy className="h-4 w-4" />
-                )}
-              </Button>
-            </div>
-          )}
+  return (
+    <header className="border-b-2 border-border bg-card">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2 px-4">
+          <Code2 className="h-6 w-6 text-foreground" />
+          <h1 className="text-xl font-bold tracking-tight text-foreground">
+            CodeShare
+          </h1>
+        </div>
+        <div className="flex  items-center">
+          <div className="h-full flex items-center border-l-2 px-4 py-6">
+            {shareID && (
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-medium text-muted-foreground">
+                  ID: {shareID}
+                </span>
+                <Button
+                  onClick={copyLink}
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 hover:bg-accent text-foreground"
+                >
+                  {copied ? (
+                    <Check className="h-4 w-4 text-primary" />
+                  ) : (
+                    <Copy className="h-4 w-4" />
+                  )}
+                </Button>
+              </div>
+            )}
+          </div>
+          <div className="h-full flex items-center border-l-2">
+            <ModeToggle />
+          </div>
         </div>
       </div>
     </header>

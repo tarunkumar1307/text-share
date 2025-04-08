@@ -25,7 +25,7 @@ Frontend is built with React.js, while the backend is powered by Node.js and Pos
 - It uses PostgreSQL as the database to store the snippets.
 - Postgres Trigger are used to automatically delete snippets after a 100 Days
 
-```postgres
+```sql
      CREATE OR REPLACE FUNCTION instance_delete_old_rows() RETURNS trigger
       LANGUAGE plpgsql
       AS $$
@@ -83,3 +83,4 @@ To set up the Text-Share application locally, follow these steps:
 1. **Access the application:**
 
    Open your web browser and navigate to `http://localhost:5173`.
+
