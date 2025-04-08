@@ -2,6 +2,8 @@
 
 Website for text/code sharing.
 
+![Screenshot from 2025-04-08 10-30-56](https://github.com/user-attachments/assets/c0c9b0c8-0428-403c-9f6f-4a4ccdf6cb79)
+
 ## Introduction
 
 Text-Share is a web application designed to facilitate the sharing of text and code snippets. The platform allows users to quickly share and access text/code snippets via a simple and intuitive interface.
@@ -84,3 +86,9 @@ To set up the Text-Share application locally, follow these steps:
 
    Open your web browser and navigate to `http://localhost:5173`.
 
+# Todo
+
+- [ ] Dark Mode is not working
+- [ ] Dockerize the backend
+- [ ] GCP Deployment
+- [ ] Moj masti
