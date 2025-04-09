@@ -38,9 +38,11 @@ export const generateContext = async (
     }
   }
 };
+
 export const fetchCustomData = async (customShareID, setContent) => {
   try {
     const response = await axios.get(`${baseUrl}/share/${customShareID}`);
+    console.log(response.data);
     if (response.data) {
       setContent(response.data);
       toast("Content fetched successfully", {

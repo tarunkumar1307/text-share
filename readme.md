@@ -101,7 +101,7 @@ To set up the Text-Share application locally, follow these steps:
 
 1. **Access the application:**
 
- Open your web browser and navigate to `http://localhost:5173`.
+Open your web browser and navigate to `http://localhost:5173`.
 
 # Todo
 
@@ -109,4 +109,5 @@ To set up the Text-Share application locally, follow these steps:
 - [x] Dockerize the backend
 - [x] GCP Deployment
 - [ ] Frontend finishing
+- [ ] Responsive Design
 - [x] Moj masti

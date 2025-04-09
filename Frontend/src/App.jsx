@@ -1,17 +1,35 @@
 import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./Layout";
 import Navbar from "./components/Navbar";
-import Dashboard from "./components/pages/Dashboard";
+import Dashboard from "./components/Dashboard";
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: (
+      <RootLayout>
+        <div className="min-h-screen">
+          <Navbar />
+          <Dashboard />
+        </div>
+      </RootLayout>
+    ),
+  },
+  {
+    path: "/share/:id",
+    element: (
+      <RootLayout>
+        <div className="min-h-screen">
+          <Navbar />
+          <Dashboard />
+        </div>
+      </RootLayout>
+    ),
+  },
+]);
 
 function App() {
-  return (
-    <RootLayout>
-      <div className="min-h-screen">
-        <Navbar />
-        <Dashboard />
-      </div>
-    </RootLayout>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

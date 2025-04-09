@@ -3,23 +3,31 @@ import { Button } from "@/components/ui/button";
 import QRCode from "react-qr-code";
 import { useStore } from "@/store/store";
 import { generateContext, fetchCustomData } from "@/lib/functions";
-import { useEffect } from "react";
 import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
 import { docco, dracula } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import LangSelector from "@/components/langSelector";
 import { toast } from "sonner";
 import { useTheme } from "@/components/theme-provider";
-import { TextScramble } from "@/components/ui/text-scramble";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 const Dashboard = () => {
+  const { id } = useParams();
   const { shareID, updateShareID } = useStore();
   const [content, setContent] = useState("");
   const [url, setUrl] = useState("");
-  const [customShareID, setCustomShareID] = useState("");
+  const [customShareID, setCustomShareID] = useState();
   const [language, setLanguage] = useState("javascript");
   const [shared, setShared] = useState(false);
   const { theme } = useTheme();
+  useEffect(() => {
+    if (id) {
+      setCustomShareID(id);
+      fetchCustomData(id, setContent);
+    }
+  }, [id]);
 
+  // For srolling the textarea and the syntax highlighter at same time
   const highlightRef = useRef();
   const inputRef = useRef();
   const syncScroll = () => {
@@ -101,15 +109,9 @@ const Dashboard = () => {
         </div>
       </div>
 
+      {/* Right side controls */}
       <div className="w-[80%] h-[calc(100vh-5rem)]">
         <div className="flex justify-end border-b-2 p-4">
-          <TextScramble
-            className="font-mono text-sm text-black"
-            duration={1.2}
-            characterSet=". "
-          >
-            {content}
-          </TextScramble>
           <LangSelector language={language} setLanguage={setLanguage} />
         </div>
         <div className="relative w-full h-[calc(100vh-10rem)] rounded-none ">
@@ -120,7 +122,6 @@ const Dashboard = () => {
             <SyntaxHighlighter
               language={language}
               style={theme === "light" ? docco : dracula}
-              // wrapLines='true'
               wrapLongLines={true}
               customStyle={{
                 margin: 0,
