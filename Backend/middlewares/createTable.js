@@ -1,17 +1,13 @@
 async function createTables(client) {
   try {
-    // Use IF NOT EXISTS directly in the CREATE TABLE statement
     const createTableQuery = `
       CREATE TABLE IF NOT EXISTS Instance (
         id SERIAL PRIMARY KEY,
         data TEXT,
         CHECK (octet_length(data) <= 100000000),
-        CHECK (id BETWEEN 1000 AND 9999),
         created_at timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
         updated_at timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP
       );
-      
-
       `;
 
     await client.query(createTableQuery);

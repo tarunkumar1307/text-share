@@ -14,8 +14,8 @@ app.use(urlencoded({ extended: true }));
 app.use(cors({ origin: "*" }));
 
 // Middlewares
-app.use(connectionMiddleware); // The middleware doesn't need to be called
-app.use(createTableMiddleware(pool)); // The middleware doesn't need to be called
+app.use(connectionMiddleware);
+app.use(createTableMiddleware(pool));
 
 app.get("/", (req, res) => {
   res.send("Heloww!");
@@ -23,6 +23,7 @@ app.get("/", (req, res) => {
 
 app.post("/generate_context", async (req, res) => {
   const content = req.body.content;
+  console.log("content -> ", content);
   insetData(req.client, content, res);
 });
 
