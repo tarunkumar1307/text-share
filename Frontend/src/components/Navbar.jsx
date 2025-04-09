@@ -32,9 +32,7 @@ const Navbar = () => {
           <div className="h-full flex items-center ">
             {shareID && (
               <div className="flex items-center border-l-2 px-4 py-6 gap-2">
-                <span className="text-sm font-medium ">
-                  ID: {shareID}
-                </span>
+                <span className="text-sm font-medium ">ID: {shareID}</span>
                 <Button
                   onClick={copyLink}
                   variant="ghost"
