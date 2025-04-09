@@ -29,20 +29,20 @@ const Navbar = () => {
           </h1>
         </div>
         <div className="flex  items-center">
-          <div className="h-full flex items-center border-l-2 px-4 py-6">
+          <div className="h-full flex items-center ">
             {shareID && (
-              <div className="flex items-center gap-2">
-                <span className="text-sm font-medium text-muted-foreground">
+              <div className="flex items-center border-l-2 px-4 py-6 gap-2">
+                <span className="text-sm font-medium ">
                   ID: {shareID}
                 </span>
                 <Button
                   onClick={copyLink}
                   variant="ghost"
                   size="icon"
-                  className="h-8 w-8 hover:bg-accent text-foreground"
+                  className="h-8 w-8  text-foreground"
                 >
                   {copied ? (
-                    <Check className="h-4 w-4 text-primary" />
+                    <Check className="h-4 w-4 text-primary" color="green" />
                   ) : (
                     <Copy className="h-4 w-4" />
                   )}

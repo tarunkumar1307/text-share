@@ -13,9 +13,9 @@ const LangSelector = ({ language, setLanguage }) => {
       <DropdownMenuTrigger className="border-none">
         {language}
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent className="mr-2 border-2 bg-card">
         <DropdownMenuLabel>Choose a language</DropdownMenuLabel>
-        <DropdownMenuSeparator />
+        <DropdownMenuSeparator className="border-1" />
         <DropdownMenuItem onClick={() => setLanguage("python")}>
           Python
         </DropdownMenuItem>

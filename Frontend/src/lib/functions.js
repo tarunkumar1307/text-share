@@ -41,14 +41,15 @@ export const generateContext = async (
 export const fetchCustomData = async (customShareID, setContent) => {
   try {
     const response = await axios.get(`${baseUrl}/share/${customShareID}`);
-    console.log("response data of share ", response.data);
-    if (response.data && response.data.content) {
-      setContent(response.data.content);
+    if (response.data) {
+      setContent(response.data);
+      toast("Content fetched successfully", {
+        type: "success",
+      });
     } else {
-      toast("No content found for this share ID", {
+      toast("Data can't be fetched", {
         type: "error",
       });
-      setContent(response.data);
     }
   } catch (error) {
     console.error("Error fetching data:", error);

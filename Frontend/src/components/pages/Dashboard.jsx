@@ -5,9 +5,11 @@ import { useStore } from "@/store/store";
 import { generateContext, fetchCustomData } from "@/lib/functions";
 import { useEffect } from "react";
 import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
-import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { docco, dracula } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import LangSelector from "@/components/langSelector";
 import { toast } from "sonner";
+import { useTheme } from "@/components/theme-provider";
+import { TextScramble } from "@/components/ui/text-scramble";
 
 const Dashboard = () => {
   const { shareID, updateShareID } = useStore();
@@ -16,13 +18,10 @@ const Dashboard = () => {
   const [customShareID, setCustomShareID] = useState("");
   const [language, setLanguage] = useState("javascript");
   const [shared, setShared] = useState(false);
+  const { theme } = useTheme();
 
   const highlightRef = useRef();
   const inputRef = useRef();
-  useEffect(() => {
-    console.log(language);
-  });
-
   const syncScroll = () => {
     highlightRef.current.scrollTop = inputRef.current.scrollTop;
     highlightRef.current.scrollLeft = inputRef.current.scrollLeft;
@@ -75,7 +74,7 @@ const Dashboard = () => {
           )}
           <div className="grid grid-cols-2 w-full mt-auto">
             <Button
-              className="bg-primary text-primary-foreground p-8 rounded-none hover:bg-primary/90 font-bold border-t-2 border-r-2 border-border"
+              className="bg-primary text-primary-foreground p-8 hover:bg-primary/90 font-bold border-t-2 border-r-2 border-border"
               onClick={() =>
                 generateContext(shareID, content, setUrl, updateShareID)
               }
@@ -85,7 +84,7 @@ const Dashboard = () => {
 
             <Button
               variant="outline"
-              className="bg-card text-card-foreground p-8 rounded-none hover:bg-accent font-bold border-t-2 border-border"
+              className="bg-card p-8  font-bold border-t-2 border-border"
               onClick={() => {
                 if (!shareID || shareID == "") {
                   toast("Create context first", {
@@ -104,6 +103,13 @@ const Dashboard = () => {
 
       <div className="w-[80%] h-[calc(100vh-5rem)]">
         <div className="flex justify-end border-b-2 p-4">
+          <TextScramble
+            className="font-mono text-sm text-black"
+            duration={1.2}
+            characterSet=". "
+          >
+            {content}
+          </TextScramble>
           <LangSelector language={language} setLanguage={setLanguage} />
         </div>
         <div className="relative w-full h-[calc(100vh-10rem)] rounded-none ">
@@ -113,7 +119,9 @@ const Dashboard = () => {
           >
             <SyntaxHighlighter
               language={language}
-              style={docco}
+              style={theme === "light" ? docco : dracula}
+              // wrapLines='true'
+              wrapLongLines={true}
               customStyle={{
                 margin: 0,
                 background: "transparent",
