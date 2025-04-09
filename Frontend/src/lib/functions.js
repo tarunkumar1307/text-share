@@ -45,9 +45,15 @@ export const fetchCustomData = async (customShareID, setContent) => {
     if (response.data && response.data.content) {
       setContent(response.data.content);
     } else {
+      toast("No content found for this share ID", {
+        type: "error",
+      });
       setContent(response.data);
     }
   } catch (error) {
     console.error("Error fetching data:", error);
+    toast("No content found for this share ID", {
+      type: "error",
+    });
   }
 };

@@ -1,0 +1,10 @@
+watch:
+  backend:
+    paths:
+      - path: ./Backend
+        target: /app
+        action: sync
+    extensions:
+      - js
+      - json
+      - ts

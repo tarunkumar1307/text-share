@@ -18,7 +18,7 @@ app.use(connectionMiddleware);
 app.use(createTableMiddleware(pool));
 
 app.get("/", (req, res) => {
-  res.send("Heloww!");
+  res.send("Helowwwww!");
 });
 
 app.post("/generate_context", async (req, res) => {
