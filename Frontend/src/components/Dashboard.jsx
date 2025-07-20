@@ -6,12 +6,8 @@ import { toast } from "sonner";
 import QRCode from "react-qr-code";
 import { useStore } from "@/store/store";
 import { generateContext, fetchCustomData } from "@/lib/functions";
-import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
-import { docco, dracula } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import LangSelector from "@/components/langSelector";
 import { Copy, Check, Menu, X } from "lucide-react";
 import AnimatedWordCycle from "@/components/ui/animated-text-cycle";
-import SleepingCat from "./neko";
 
 const Dashboard = () => {
   const { id } = useParams();
@@ -19,7 +15,6 @@ const Dashboard = () => {
   const [content, setContent] = useState("");
   const [url, setUrl] = useState("");
   const [customShareID, setCustomShareID] = useState();
-  const [language, setLanguage] = useState("javascript");
   const [shared, setShared] = useState(false);
   const [copied, setCopied] = useState(false);
   const [showControls, setShowControls] = useState(true);
@@ -129,18 +124,7 @@ const Dashboard = () => {
               {content?.length} characters | {content?.split("\n").length} lines
             </div>
           </div>
-          {shared && shareID && shareID != "" && (
-            <div className="flex items-center justify-center h-full p-4">
-              <QRCode
-                size={256}
-                className="w-full max-w-48 md:max-w-56 lg:max-w-64"
-                value={url}
-                viewBox={`0 0 256 256`}
-                fgColor="var(--foreground)"
-                bgColor="var(--background)"
-              />
-            </div>
-          )}
+
           <div className="flex justify-between items-center p-4 md:p-6 lg:p-8 border-b-2 border-border">
             <h1 className="text-xl md:text-2xl lg:text-4xl font-light text-left text-muted-foreground">
               Share your{" "}
@@ -160,6 +144,18 @@ const Dashboard = () => {
               />
             </h1>
           </div>
+          {shareID && shareID != "" && (
+            <div className="flex items-center justify-center h-full p-4">
+              <QRCode
+                size={128}
+                className="w-full max-w-48 md:max-w-56 lg:max-w-64"
+                value={url}
+                viewBox={`0 0 128 128`}
+                fgColor="var(--foreground)"
+                bgColor="var(--background)"
+              />
+            </div>
+          )}
           <div className="grid grid-cols-2 w-full mt-auto">
             <Button
               className="h-full px-4 md:px-6 lg:px-8 py-5 md:py-5 lg:py-6 bg-primary text-primary-foreground rounded-none hover:bg-primary/90 font-bold"
@@ -170,9 +166,7 @@ const Dashboard = () => {
               {shareID && shareID != "" ? "UPDATE" : "CREATE"}
             </Button>
 
-            <div className="absolute left-1/4 bottom-11 hidden lg:block">
-              <SleepingCat />
-            </div>
+
             <Button
               variant="outline"
               className="h-full border-t-2 px-4 md:px-6 lg:px-8 py-5 md:py-5 lg:py-6  rounded-none font-bold"
@@ -209,26 +203,13 @@ const Dashboard = () => {
               <Copy className="size-4 mx-2 md:mx-4" />
             )}
           </Button>
-          <LangSelector language={language} setLanguage={setLanguage} />
         </div>
         <div className="relative w-full h-[calc(100vh-10rem)]">
           <div
             ref={highlightRef}
             className="absolute inset-0 p-2 overflow-auto pointer-events-none whitespace-pre-wrap break-words rounded-none"
           >
-            <SyntaxHighlighter
-              language={language}
-              style={theme === "light" ? docco : dracula}
-              wrapLongLines={true}
-              customStyle={{
-                margin: 0,
-                background: "transparent",
-                padding: 0,
-                height: "calc(100vh-10rem)",
-              }}
-            >
-              {content || " "}
-            </SyntaxHighlighter>
+            {content || " "}
           </div>
 
           <textarea

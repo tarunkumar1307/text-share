@@ -1,10 +1,9 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-/* @import "tailwindcss/typography"; */
 
 @custom-variant dark (&:is(.dark *));
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Necto;
   line-height: 1.5;
   font-weight: 400;
 
@@ -147,22 +146,7 @@
 @font-face {
   font-family: "Necto";
   src: local("Necto-Mono"),
-    url("./assets/fonts/necto_mono/NectoMono/NectoMono-Regular.otf")
+    url("./assets/fonts/NectoMono-Regular.otf")
       format("opentype");
 }
 
-#oneko {
-  z-index: 100;
-}
-
-@keyframes sleepingCat {
-  0%,
-  50% {
-    background-position: -64px 0;
-  }
-
-  50%,
-  100% {
-    background-position: -64px -32px;
-  }
-}
